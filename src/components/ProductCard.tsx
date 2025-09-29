@@ -1,5 +1,6 @@
 import { Heart, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 interface ProductCardProps {
   image: string;
@@ -10,6 +11,12 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ image, title, price, rating, category }: ProductCardProps) => {
+  const [isWishlisted, setIsWishlisted] = useState(false);
+
+  const handleWishlistToggle = () => {
+    setIsWishlisted(!isWishlisted);
+  };
+
   return (
     <div className="group relative bg-card rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
       <div className="relative overflow-hidden">
@@ -23,8 +30,9 @@ const ProductCard = ({ image, title, price, rating, category }: ProductCardProps
           variant="ghost" 
           size="icon"
           className="absolute top-4 right-4 bg-white/90 hover:bg-white text-foreground rounded-full shadow-md"
+          onClick={handleWishlistToggle}
         >
-          <Heart className="h-4 w-4" />
+          <Heart className={`h-4 w-4 transition-colors ${isWishlisted ? 'fill-red-500 text-red-500' : ''}`} />
         </Button>
       </div>
       

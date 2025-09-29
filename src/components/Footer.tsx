@@ -1,8 +1,31 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Facebook, Instagram, Twitter } from "lucide-react";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 const Footer = () => {
+  const [email, setEmail] = useState('');
+  const { toast } = useToast();
+
+  const handleNewsletterSignup = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email.trim()) {
+      toast({
+        title: "Successfully subscribed!",
+        description: "You'll receive our latest updates and exclusive offers.",
+      });
+      setEmail('');
+    }
+  };
+
+  const handleSocialClick = (platform: string) => {
+    toast({
+      title: `Opening ${platform}`,
+      description: `Redirecting to our ${platform} page...`,
+    });
+  };
+
   return (
     <footer className="bg-newsletter-bg text-footer-text">
       {/* Newsletter Section */}
@@ -12,15 +35,19 @@ const Footer = () => {
             The List Everyone Wants To Be On. Sign Up To Get Early Access, VIP Perks, And Exclusive Offers Straight To Your Inbox.
           </h3>
           
-          <div className="max-w-md mx-auto flex gap-3 mt-8">
+          <form onSubmit={handleNewsletterSignup} className="max-w-md mx-auto flex gap-3 mt-8">
             <Input 
               placeholder="Enter Your Email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="bg-white text-foreground border-none rounded-lg"
+              required
             />
-            <Button className="bg-primary hover:bg-primary-dark text-primary-foreground px-6 rounded-lg">
+            <Button type="submit" className="bg-primary hover:bg-primary-dark text-primary-foreground px-6 rounded-lg">
               Subscribe
             </Button>
-          </div>
+          </form>
         </div>
       </div>
       
@@ -51,13 +78,28 @@ const Footer = () => {
             <div>
               <h4 className="font-bold mb-4">Follow Us</h4>
               <div className="flex space-x-4">
-                <Button variant="ghost" size="icon" className="text-footer-text hover:text-primary">
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  className="text-footer-text hover:text-primary"
+                  onClick={() => handleSocialClick('Facebook')}
+                >
                   <Facebook className="h-5 w-5" />
                 </Button>
-                <Button variant="ghost" size="icon" className="text-footer-text hover:text-primary">
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  className="text-footer-text hover:text-primary"
+                  onClick={() => handleSocialClick('Instagram')}
+                >
                   <Instagram className="h-5 w-5" />
                 </Button>
-                <Button variant="ghost" size="icon" className="text-footer-text hover:text-primary">
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  className="text-footer-text hover:text-primary"
+                  onClick={() => handleSocialClick('Twitter')}
+                >
                   <Twitter className="h-5 w-5" />
                 </Button>
               </div>

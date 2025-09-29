@@ -25,7 +25,14 @@ const HeroSection = () => {
             <span className="block">CURATED FOR YOU.</span>
           </p>
           
-          <Button size="lg" className="bg-primary hover:bg-primary-dark text-primary-foreground px-8 py-6 text-lg rounded-lg">
+          <Button 
+            size="lg" 
+            className="bg-primary hover:bg-primary-dark text-primary-foreground px-8 py-6 text-lg rounded-lg"
+            onClick={() => {
+              const collections = document.getElementById('featured-collections');
+              collections?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
             Shop Now
           </Button>
         </div>
