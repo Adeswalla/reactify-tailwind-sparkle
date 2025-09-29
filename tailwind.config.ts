@@ -22,7 +22,13 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          light: "hsl(var(--primary-light))",
+          dark: "hsl(var(--primary-dark))",
         },
+        "price-accent": "hsl(var(--price-accent))",
+        "rating-star": "hsl(var(--rating-star))",
+        "newsletter-bg": "hsl(var(--newsletter-bg))",
+        "footer-text": "hsl(var(--footer-text))",
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
